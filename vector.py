@@ -35,7 +35,7 @@ def draw_window(circles):
     pygame.display.update()
 
 def main():
-    circles = [circle.Circle(WIN,(500,i * 110),ratios[i - 1]) for i in range(1,9)]
+    circles = [circle.Circle(WIN,(200,i * 110),ratios[i - 1]) for i in range(1,9)]
 
     clock = pygame.time.Clock()
     run = True

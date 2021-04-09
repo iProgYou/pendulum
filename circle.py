@@ -7,12 +7,12 @@ class Circle:
         self.win = win
         self.radius = 50
         self.color = (
-            random.randint(0,256),
-            random.randint(0,256),
-            random.randint(0,256)
+            random.randint(0,255),
+            random.randint(0,255),
+            random.randint(0,255)
         )
         self.ratio = ratio
-        self.velocity = 2
+        self.velocity = 1
         self.vector = (1,0)
 
 
