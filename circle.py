@@ -12,7 +12,7 @@ class Circle:
             random.randint(0,255)
         )
         self.ratio = ratio
-        self.velocity = 1
+        self.velocity = 2
         self.vector = (1,0)
 
 
