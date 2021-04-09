@@ -15,11 +15,12 @@ pygame.display.set_caption("Pendulum?")
 CIRCLE_RAD = 50
 STARTING_LOCATION = (100,100)
 
-VECTOR = (-1,1)
-VELOCITY = .00001
+VECTOR = (1,1)
+VELOCITY = 10
 
-def draw_window():
+def draw_window(new_location):
     WIN.fill(WHITE)
+    pygame.draw.circle(WIN,BLACK,new_location,CIRCLE_RAD)
     pygame.display.update()
 
 def update_circle_pos(location):
@@ -28,7 +29,7 @@ def update_circle_pos(location):
     new_x = old_x + (VECTOR[1] * VELOCITY)
     new_location = (new_y,new_x)
     print(new_location)
-    pygame.draw.circle(WIN,BLACK,new_location,CIRCLE_RAD)
+    
     return new_location
 
 def main():
@@ -42,7 +43,7 @@ def main():
                 run = False
         
         location = update_circle_pos(location)
-        draw_window()
+        draw_window(location)
 
     pygame.quit()
 
