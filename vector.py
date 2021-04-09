@@ -30,25 +30,26 @@ print(ratios)
 VECTOR = (1,0)
 VELOCITY = 10
 
-def draw_window(circles,dt):
+def draw_window(circles,time_since_start):
     WIN.fill(WHITE)
     for circle in circles:
-        circle.draw(dt)
+        circle.draw(time_since_start)
     pygame.display.update()
 
 def main():
     circles = [circle.Circle(WIN,(200,i * 110),ratios[i - 1]) for i in range(1,9)]
-
+    counter = 0
     clock = pygame.time.Clock()
     run = True
     while run:
         clock.tick(FPS)
-        dt = clock.get_time()
+        time_since_start = counter
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
         
-        draw_window(circles,dt)
+        draw_window(circles,time_since_start)
+        counter += 1
 
     pygame.quit()
 
