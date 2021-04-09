@@ -1,4 +1,5 @@
 import pygame
+import circle
 
 pygame.init()
 
@@ -12,10 +13,7 @@ WHITE = (255,255,255)
 BLACK = (0,0,0)
 pygame.display.set_caption("Pendulum?")
 
-CIRCLE_RAD = 50
-STARTING_LOCATION = (100,100)
 
-circle_locations = [(500,i * 110) for i in range(1,9)]
 ratios = [
     2,
     1.77777777777,
@@ -30,22 +28,15 @@ ratios = [
 VECTOR = (1,0)
 VELOCITY = 10
 
-def draw_window(circle_locations):
+def draw_window(circles):
     WIN.fill(WHITE)
-    for loc in circle_locations:
-        pygame.draw.circle(WIN,BLACK,loc,CIRCLE_RAD)
+    for circle in circles:
+        circle.draw()
     pygame.display.update()
 
-def update_circle_pos(location):
-    old_y,old_x = location
-    new_y = old_y + (VECTOR[0] * VELOCITY)
-    new_x = old_x + (VECTOR[1] * VELOCITY)
-    new_location = (new_y,new_x)
-    print(new_location)
-    
-    return new_location
-
 def main():
+    circles = [circle.Circle(WIN,(500,i * 110),ratios[i - 1]) for i in range(1,9)]
+
     clock = pygame.time.Clock()
     run = True
     while run:
@@ -54,8 +45,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
         
-        # location = update_circle_pos(location)
-        draw_window(circle_locations)
+        draw_window(circles)
 
     pygame.quit()
 
