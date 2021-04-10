@@ -22,9 +22,9 @@ class Circle:
         pygame.draw.circle(self.win,self.color,self.position,self.radius)
 
     def update_position(self,time_since_start):
-        b = (2 * math.pi)/self.velocity
-        a = 600
-        x = time_since_start
+        b = (2 * math.pi)/(self.velocity * (1 / self.ratio))
+        a = 300
+        x = time_since_start / 200
         c = 0
         d = 500
         self.position =  (a * math.sin(b * (x + c)) + d,self.position[1])
