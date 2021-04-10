@@ -2,8 +2,10 @@ import random
 import pygame
 import math
 
+
+
 class Circle:
-    def __init__(self,win,position,ratio):
+    def __init__(self,win,position,ratio,sound):
         self.position = position
         self.win = win
         self.radius = 50
@@ -15,6 +17,9 @@ class Circle:
         self.ratio = ratio
         self.velocity = 1
         self.vector = (1,0)
+        self.sound = sound
+        self.right = True
+
 
 
     def draw(self,time_since_start):
@@ -27,6 +32,14 @@ class Circle:
         x = time_since_start / 200
         c = 0
         d = 500
-        self.position =  (a * math.sin(b * (x + c)) + d,self.position[1])
-        print(self.position[0])
+
+        new_pos = (a * math.sin(b * (x + c)) + d,self.position[1])
+        dir = self.position[0] - new_pos[0]
+        # if dir is > 0 (traveling left) and self.right == true, flip
+        if dir > 0 and self.right:
+            self.right = False
+        elif dir < 0 and not self.right:
+            self.sound.play()
+            self.right = True
+        self.position =  new_pos
 
