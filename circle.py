@@ -36,9 +36,9 @@ class Circle:
         new_pos = (a * math.sin(b * (x + c)) + d,self.position[1])
         dir = self.position[0] - new_pos[0]
         # if dir is > 0 (traveling left) and self.right == true, flip
-        if dir > 0 and self.right:
+        if dir >= 0 and self.right:
             self.right = False
-        elif dir < 0 and not self.right:
+        elif dir <= 0 and not self.right:
             self.sound.play()
             self.right = True
         self.position =  new_pos
