@@ -3,6 +3,7 @@ import circle
 
 pygame.init()
 pygame.mixer.init()
+pygame.mixer.set_num_channels(10)
 
 WIDTH,HEIGHT = 1000,1000
 
@@ -24,7 +25,6 @@ def draw_window(circles,time_since_start):
     WIN.fill(WHITE)
     for circle in circles:
         circle.draw(time_since_start)
-    pygame.draw.line(WIN,BLACK,(150,50),(150,950),5)
     pygame.display.update()
 
 def main():

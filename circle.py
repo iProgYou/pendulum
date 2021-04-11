@@ -2,8 +2,6 @@ import random
 import pygame
 import math
 
-
-
 class Circle:
     def __init__(self,win,position,ratio,sound):
         self.position = position
@@ -19,11 +17,22 @@ class Circle:
         self.vector = (1,0)
         self.sound = sound
         self.right = True
+        self.line_pos = [*self.position]
+        self.change_colors = False
 
+    def draw_line(self):
+        line_pos_start = (self.line_pos[0] - 50,self.line_pos[1] - 50)
+        line_pos_end = (self.line_pos[0] - 50,self.line_pos[1] + 50)
+        if self.change_colors:
+            pygame.draw.line(self.win,self.color,line_pos_start,line_pos_end,5)
+        else:
+            pygame.draw.line(self.win,(0,0,0),line_pos_start,line_pos_end,5)
+            
 
 
     def draw(self,time_since_start):
         self.update_position(time_since_start)
+        self.draw_line()
         pygame.draw.circle(self.win,self.color,self.position,self.radius)
 
     def update_position(self,time_since_start):
@@ -35,11 +44,15 @@ class Circle:
 
         new_pos = (a * math.sin(b * (x + c)) + d,self.position[1])
         dir = self.position[0] - new_pos[0]
-        # if dir is > 0 (traveling left) and self.right == true, flip
+
+        if new_pos[0] > 300:
+            self.change_colors = False
+
         if dir >= 0 and self.right:
             self.right = False
         elif dir <= 0 and not self.right:
             self.sound.play()
             self.right = True
+            self.change_colors = True
         self.position =  new_pos
 
