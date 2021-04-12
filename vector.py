@@ -17,7 +17,6 @@ pygame.display.set_caption("Pendulum?")
 
 
 ratios = [2 - (1/7 * i) for i in range(0,8)]
-print(ratios)
 VECTOR = (1,0)
 VELOCITY = 10
 
