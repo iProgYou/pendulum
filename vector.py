@@ -2,6 +2,8 @@ import pygame
 import circle
 
 pygame.init()
+pygame.mixer.init()
+pygame.mixer.set_num_channels(10)
 
 WIDTH,HEIGHT = 1000,1000
 
@@ -14,19 +16,7 @@ BLACK = (0,0,0)
 pygame.display.set_caption("Pendulum?")
 
 
-# ratios = [
-#     2,
-#     1.77777777777,
-#     1.58024691358,
-#     1.5,
-#     1.33333333333,
-#     1.18518518518,
-#     1.0534979424,
-#     1
-# ]
-# one_div_6 = 1/7
 ratios = [2 - (1/7 * i) for i in range(0,8)]
-print(ratios)
 VECTOR = (1,0)
 VELOCITY = 10
 
@@ -37,7 +27,7 @@ def draw_window(circles,time_since_start):
     pygame.display.update()
 
 def main():
-    circles = [circle.Circle(WIN,(200,i * 110),ratios[i - 1]) for i in range(1,9)]
+    circles = [circle.Circle(WIN,(200,i * 110),ratios[i - 1],pygame.mixer.Sound(f'./audio/{9 - i}.wav')) for i in range(1,9)]
     counter = 0
     clock = pygame.time.Clock()
     run = True
