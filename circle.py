@@ -1,5 +1,6 @@
 import random
 import pygame
+import math
 
 class Circle:
     def __init__(self,win,position,ratio):
@@ -12,20 +13,20 @@ class Circle:
             random.randint(0,255)
         )
         self.ratio = ratio
-        self.velocity = 2
+        self.velocity = 1
         self.vector = (1,0)
 
 
-    def draw(self):
-        self.update_position()
+    def draw(self,time_since_start):
+        self.update_position(time_since_start)
         pygame.draw.circle(self.win,self.color,self.position,self.radius)
 
-    def update_position(self):
-        old_x,old_y = self.position
-        new_x = old_x + (self.vector[0] * self.velocity * self.ratio)
-        new_y = old_y + (self.vector[1] * self.velocity * self.ratio)
+    def update_position(self,time_since_start):
+        b = (2 * math.pi)/self.velocity
+        a = 600
+        x = time_since_start
+        c = 0
+        d = 500
+        self.position =  (a * math.sin(b * (x + c)) + d,self.position[1])
+        print(self.position[0])
 
-        if new_x >= 800 or new_x <= 200:
-            self.vector = (self.vector[0] * -1,self.vector[1])
-
-        self.position = (new_x,new_y)
